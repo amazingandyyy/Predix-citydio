@@ -8,6 +8,8 @@
     <title>Citygraph</title>
 
     <link rel='stylesheet' href='style.css' />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
+
     <link rel="stylesheet" href="https://bootswatch.com/united/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
@@ -17,7 +19,7 @@
     <![endif]-->
 </head>
 
-<body>
+<body ng-app='myApp' ng-controller='mainCtrl'>
     <div class="container text-center">
         <h3>Citygraph</h3>
         <ul class="pager">
@@ -28,15 +30,31 @@
     </div>
     <hr>
     <div class="container text-center">
-        <button type="button" class="btn btn-default" onclick="getPhoto()">
+        <button type="button" class="btn btn-default" ng-click="getPhoto()">
+            <!-- <button type="button" class="btn btn-default" onclick="getPhoto()"> -->
             Get photo
         </button>
+        <br>
+        <br>
+        <div ng-if="images" class="imageData">
+            <h3>Photos</h3>
+            <br>
+            <br>
+            <pre>
+            {{images | json}}
+        </pre>
+        </div>
+        <div>
+            {{image}}
+        </div>
+
     </div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="main.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>
