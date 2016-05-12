@@ -30,12 +30,35 @@
     </div>
     <hr>
     <div class="container text-center">
-        <button type="button" class="btn btn-default" ng-click="getPhoto()">
-            <!-- <button type="button" class="btn btn-default" onclick="getPhoto()"> -->
+
+        <form class="form-inline" ng-submit="giveLocation()">
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputEmail3">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputPassword3">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary" ng-click="getPhotos()">
+              Get photos from predix
+          </button>
+      </form>
+
+        <!-- <button type="button" class="btn btn-default" ng-click="getPhoto()">
             Get photo
-        </button>
+        </button> -->
         <br>
+        <div ng-if="image" class="imageData">
+            <h3>Photos</h3>
+            <br>
+            <br>
+            <pre>
+            {{image | json}}
+        </pre>
+        </div>
         <br>
+        <i ng-if="loading" class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
         <div ng-if="images" class="imageData">
             <h3>Photos</h3>
             <br>
@@ -44,9 +67,7 @@
             {{images | json}}
         </pre>
         </div>
-        <div>
-            {{image}}
-        </div>
+
 
     </div>
 
