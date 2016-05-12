@@ -10,7 +10,10 @@
     <link rel='stylesheet' href='style.css' />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
 
-    <link rel="stylesheet" href="https://bootswatch.com/united/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://bootswatch.com/united/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css"> -->
+    <link rel='stylesheet' href='bootswatch.min.css' />
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <!--[if lt IE 9]>
@@ -45,16 +48,18 @@
           </button>
       </form>
 
-        <!-- <button type="button" class="btn btn-default" ng-click="getPhoto()">
+        <button type="button" class="btn btn-default" ng-click="getPhoto()">
             Get photo
-        </button> -->
+        </button>
         <br>
         <div ng-if="image" class="imageData">
             <h3>Photos</h3>
             <br>
+            g
+                <img src="data:image/png;base64,{{image}}" />
             <br>
             <pre>
-            {{image | json}}
+            {{image}}
         </pre>
         </div>
         <br>
