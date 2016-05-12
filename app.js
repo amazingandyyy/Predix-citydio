@@ -9,7 +9,7 @@ app.controller('mainCtrl', function($scope, $http, $timeout) {
         "Description": {
             "type": 0,
             "captions": [{
-                "text": "a car park on the street",
+                "text": "a person crosses a road",
                 "confidence": 0.5787910274379539
             }]
         },
@@ -17,16 +17,16 @@ app.controller('mainCtrl', function($scope, $http, $timeout) {
             "name": "outdoor",
             "confidence": 0.8904572129249573
         }, {
-            "name": "road",
-            "confidence": 0.48821866512298584
-        }, {
-            "name": "tree",
-            "confidence": 0.71702839732170105
-        }, {
             "name": "car",
             "confidence": 0.2654281258583069
         }, {
-            "name": "street",
+            "name": "road",
+            "confidence": 0.48821866512298584
+        }, {
+            "name": "person",
+            "confidence": 0.41702839732170105
+        }, {
+            "name": "road",
             "confidence": 0.63079562783241272
         }],
         "Image Format": "jpeg",
@@ -129,23 +129,23 @@ app.controller('mainCtrl', function($scope, $http, $timeout) {
             })
     }
 
-    $(function() {
+    function getQuote(){
         var params = {
             // Request parameters
             "visualFeatures": "Categories",
             "details": "{string}",
         };
-
+        var imageUri = "1000000023_1462485428003_IMAGE";
         $.ajax({
             url: "https://api.projectoxford.ai/vision/v1.0/analyze?" + $.param(params),
             beforeSend: function(xhrObj){
                 // Request headers
                 xhrObj.setRequestHeader("Content-Type","application/json");
-                xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","{subscription key}");
+                xhrObj.setRequestHeader("09beba7c6d274a52b739511bf20d93bb","{3e099bec5b48469799b9dfb1a6a5a313}");
             },
             type: "POST",
             // Request body
-            data: "{body}",
+            data: "{https://ie-media-service.run.aws-usw02-pr.ice.predix.io/media/file/${imageUri}}",
         })
         .done(function(data) {
             alert("success");
@@ -153,7 +153,7 @@ app.controller('mainCtrl', function($scope, $http, $timeout) {
         .fail(function() {
             // alert("error");
         });
-    });
+    }
 
 
 });
