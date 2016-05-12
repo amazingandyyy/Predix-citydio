@@ -1,0 +1,50 @@
+{
+ "VCAP_SERVICES": {
+  "predix-uaa": [
+   {
+    "credentials": {
+     "issuerId": "https://42be72b6-cb11-4dc8-bcf7-9e135666811f.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token",
+     "subdomain": "42be72b6-cb11-4dc8-bcf7-9e135666811f",
+     "uri": "https://42be72b6-cb11-4dc8-bcf7-9e135666811f.predix-uaa.run.aws-usw02-pr.ice.predix.io",
+     "zone": {
+      "http-header-name": "X-Identity-Zone-Id",
+      "http-header-value": "42be72b6-cb11-4dc8-bcf7-9e135666811f"
+     }
+    },
+    "label": "predix-uaa",
+    "name": "citydio",
+    "plan": "Tiered",
+    "provider": null,
+    "syslog_drain_url": null,
+    "tags": []
+   }
+  ]
+ }
+}
+
+{
+ "VCAP_APPLICATION": {
+  "application_id": "abef5763-6926-4b6b-a2dc-f90ba62fbc6e",
+  "application_name": "citydio5",
+  "application_uris": [
+   "citydio5.run.aws-usw02-pr.ice.predix.io"
+  ],
+  "application_version": "9339495c-1c4d-4d70-81c8-7d490c299d13",
+  "limits": {
+   "disk": 1024,
+   "fds": 16384,
+   "mem": 64
+  },
+  "name": "citydio5",
+  "space_id": "b7d988ba-f5c7-4db9-bf67-d95163e05fed",
+  "space_name": "dev",
+  "uris": [
+   "citydio5.run.aws-usw02-pr.ice.predix.io"
+  ],
+  "users": null,
+  "version": "9339495c-1c4d-4d70-81c8-7d490c299d13"
+ }
+}
+
+
+cf create-service predix-uaa Tiered citydio -c '{"adminClientSecret":"citydio"}'
