@@ -5,13 +5,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Citygraph</title>
+    <title>City Vision</title>
 
     <link rel='stylesheet' href='style.css' />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
 
     <!-- <link rel="stylesheet" href="https://bootswatch.com/united/bootstrap.min.css"> -->
     <!-- <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://bootswatch.com/darkly/bootstrap.min.css"> -->
     <link rel='stylesheet' href='bootswatch.min.css' />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -24,54 +25,99 @@
 
 <body ng-app='myApp' ng-controller='mainCtrl'>
     <div class="container text-center">
-        <h3>Citygraph</h3>
+        <h3>City Vision</h3>
         <ul class="pager">
-            <li><a ui-sref="home">Home</a></li>
-            <li><a ui-sref="start">Start</a></li>
-            <li><a ui-sref="photo">Photo</a></li>
+            <li><a href="/intro.html">Home</a></li>
+            <li><a>Start</a></li>
+            <li><a>See the city</a></li>
         </ul>
     </div>
     <hr>
-    <div class="container text-center">
+    <div class="container text-center data">
+        <div class="current_container">
+            <img src="https://iotworldevent.com/files/101973-300x300-CurrentLogo_Ylw.jpg">
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary" ng-click="getDevices()">
+                Get devices from Predix
+            </button>
+            <h4>Bounding Box: 32.715675:-117.161230,32.708498:-117.151681</h4>
+            <i ng-if="loading && !devices" class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom">
+                </i>
+            <div ng-if="devices" class="data">
+                <br>
+                <h3>{{devices.length}} Devices found in area of 32.715675:-117.161230,32.708498:-117.151681</h3>
+                <br>
+                <pre>{{devices | json}}</pre>
+            </div>
+            <hr>
+        </div>
+        <div ng-if="devices">
+            <div class="input-group">
+                <span class="input-group-addon">https://ie-public-safety.run.aws-usw02-pr.ice.predix.io/v1/assets/</span>
+                <input type="text" class="form-control" ng-model="deviceIndex" placeholder="choose a device">
+            </div>
+            <p>/media?media-types=IMAGE&start-ts=1453832741281&end-ts=1462996283887&size=30&page=1</p>
 
-        <form class="form-inline" ng-submit="giveLocation()">
-          <div class="form-group">
-            <label class="sr-only" for="exampleInputEmail3">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Enter email">
-          </div>
-          <div class="form-group">
-            <label class="sr-only" for="exampleInputPassword3">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
-          </div>
-          <button type="submit" class="btn btn-primary" ng-click="getPhotos()">
-              Get photos from predix
-          </button>
-      </form>
-
-        <button type="button" class="btn btn-default" ng-click="getPhoto()">
-            Get photo
-        </button>
-        <br>
-        <div ng-if="image" class="imageData">
-            <h3>Photos</h3>
             <br>
-            g
-                <img src="data:image/png;base64,{{image}}" />
+            <button type="button" class="btn btn-success" ng-click="getPhotos(deviceIndex)">
+                GET photos from device#{{deviceIndex}}
+            </button>
+            <br>
+            <br>
+            <i ng-if="loading && !images" class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom">
+                </i>
+            <div ng-if="images" class="data">
+                <h3>{{images.length}} Photos from device#{{deviceIndex}}</h3>
+                <br>
+                <br>
+                <pre>{{images | json}}</pre>
+            </div>
+            <hr>
+        </div>
+        <div ng-if="images">
+            <div class="input-group">
+                <span class="input-group-addon">https://ie-media-service.run.aws-usw02-pr.ice.predix.io/media/file/</span>
+                <input type="text" class="form-control" ng-model="photoIndex" placeholder="choose a photo">
+            </div>
+            <br>
+            <button type="button" class="btn btn-access" ng-click="getPhoto(photoIndex)">
+                Get the photos of device#{{deviceIndex}}
+            </button>
+            <br>
+            <i ng-if="loading && !image" class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom">
+                </i>
+            <div ng-if="image" class="data">
+                <br>
+                <h3>Photo#{{photoIndex}}</h3>
+                <br>
+                <pre>{{image | json}}</pre>
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="/photos/image2.jpg" class="imageee">
+                    </div>
+                    <div class="col-md-6">
+                        <pre class="data">
+                            {{analysis | json}}
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+
+
+        <!-- <div ng-if="image" class="imageData">
+            <h3>Photos</h3>
+            <br> g
+            <img src="data:image/png;base64,{{image}}" />
             <br>
             <pre>
             {{image}}
         </pre>
-        </div>
-        <br>
-        <i ng-if="loading" class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
-        <div ng-if="images" class="imageData">
-            <h3>Photos</h3>
-            <br>
-            <br>
-            <pre>
-            {{images | json}}
-        </pre>
-        </div>
+        </div> -->
+
 
 
     </div>

@@ -1,6 +1,14 @@
-.imageData{
+.data{
     text-align: left;
 }
 .fa-spinner{
     margin: 100px;
+}
+.data h4{
+    font-weight: 900;
+    font-size: 0.9em;
+    text-decoration: underline;
+}
+.imageee{
+    width: 100%;
 }
